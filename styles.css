@@ -1,0 +1,36 @@
+.parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  height: 700px;
+  width: 100%;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.left-panel,
+.right-panel {
+  padding: 1.5rem;
+  height: inherit;
+  border: 1px solid lightblue;
+  overflow: hidden;
+  scroll-behavior: auto;
+}
+
+#msg-logger {
+  overflow-y: auto;
+  height: 90%;
+}
+
+.left-panel {
+  flex-grow: 1;
+}
+
+.right-panel {
+  flex-grow: 3;
+}
