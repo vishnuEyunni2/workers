@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timer in background</title>
+  </head>
+  <body>
+    <div>
+      <div>
+        <label id="error_msg"></label>
+        <label
+          >Counter:
+          <p id="Logger"></p
+        ></label>
+      </div>
+      <br />
+      <button id="start">Start</button>
+      <button id="reset">Reset</button>
+    </div>
+    <script>
+      let task;
+      let timerId;
+
+      if (Worker) {
+        task = new Worker("worker.js");
+
+        task.onmessage = (e) => {
+          const { data } = e;
+          if (data.startsWith("count_")) {
+            let count = data.split("_")[1];
+            document.getElementById("Logger").innerText = count;
+          }
+
+          if (data === "reset") {
+            document.getElementById("Logger").innerText = 0;
+          }
+
+          if (data.startsWith("timerId")) {
+            timerId = data.split("_")[1];
+          }
+        };
+      }
+
+      // Register events to communicate with worker.js
+      if (task) {
+        document.getElementById("start").addEventListener("click", (e) => {
+          task.postMessage("start");
+        });
+        document.getElementById("reset").addEventListener("click", (e) => {
+          task.postMessage({ msg: "reset", id: timerId });
+        });
+      }
+    </script>
+  </body>
+</html>
