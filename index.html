@@ -1,47 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Worker demo</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <script>
-      function ale() {
-        alert(1);
-      }
-    </script>
-    <script src="main.js"></script>
-    <div class="parent">
-      <section class="left-panel">
-        <h2>Tutorial on workers</h2>
-        <div>
-          <label for="input_msg">Enter message to worker:</label>
-          <input
-            type="text"
-            id="input_msg"
-            placeholder="Enter message here..."
-          />
-          <button onclick="buttonClicked()">Send</button>
-        </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Worker demo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <script>
+    function ale() {
+      alert(1);
+    }
+  </script>
+  <script src="main.js"></script>
+  <div class="parent">
+    <section class="left-panel">
+      <h2>Tutorial on workers</h2>
+      <section>
+        <article>
+          This is a demonstration of how workers are run separately, to the main thread.
+          <br />
+          The input field belows takes an input and when hit on <strong>Send</strong> it notifies to the webworker.
+          Webworker then tries to log the input received in the log panel.
+        </article>
       </section>
-      <section class="right-panel">
-        <div
-          style="
+      <div>
+        <label for="input_msg">Enter message to worker:</label>
+        <input type="text" id="input_msg" placeholder="Enter message here..." />
+        <button onclick="buttonClicked()">Send</button>
+      </div>
+    </section>
+    <section class="right-panel">
+      <div style="
             display: flex;
             justify-content: space-around;
             align-items: center;
             border-bottom: 1px solid gray;
             padding: 4px 0;
-          "
-        >
-          <p>Worker Message log:</p>
-          <button onclick="clearLogBtn()">Clear log</button>
-        </div>
-        <div id="msg-logger"></div>
-      </section>
-    </div>
-  </body>
+          ">
+        <p>Worker Message log:</p>
+        <button onclick="clearLogBtn()">Clear log</button>
+      </div>
+      <div id="msg-logger"></div>
+    </section>
+  </div>
+</body>
+
 </html>

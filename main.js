@@ -33,7 +33,31 @@ try {
     target.replaceChildren();
   }
 
+  window.addEventListener('message', (e) => {
+    logMessage('wow')
+    if (e.data) {
+    }
+  });
+
 } catch (err) {
   console.error('Your browser doesnt support Workers. Please check error log for more details.');
   console.error(err);
 }
+
+
+const APP = {
+  SW: null,
+  init: () => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('sw.js', { scope: '/' })
+        .then(registration => {
+          APP.SW = registration.installing || registration.waiting || registration.active;
+          console.log('service worker registered !');
+        })
+    }
+  }
+}
+
+
+window.addEventListener('DOMContentLoaded', APP.init())
